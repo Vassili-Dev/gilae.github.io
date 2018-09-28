@@ -158,7 +158,7 @@
 		var plugin = event.data.plugin,
 			$elem = $(this),
 			value;
-		const end_key = 35, home_key=36;
+
 		switch(event.keyCode) {
 			case ik_utils.keys.right:
 				value = parseInt($elem.attr('aria-valuenow')) + plugin.options.step;
@@ -166,8 +166,7 @@
 				plugin.setValue(value);
 				break;
 
-			//case ik_utils.keys.end:
-			case end_key:
+			case ik_utils.keys.end:
 				plugin.setValue(plugin.options.maxValue);
 				break;
 
@@ -177,7 +176,7 @@
 				plugin.setValue(value);
 				break;
 
-			case home_key:
+			case ik_utils.keys.home:
 				plugin.setValue(plugin.options.minValue);
 				break;
 		}
