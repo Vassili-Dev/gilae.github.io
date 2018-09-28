@@ -31,7 +31,7 @@
 		id = 'toggle' + $('.ik_togglebutton').length; // generate unique id
 		$elem = this.element
 			.attr({
-				"id": id //,
+				"id": id ,
 				"tabindex": 0,
 				"role": "button",
 				"aria-label": plugin.options.label,
@@ -42,7 +42,7 @@
 		
 		$elem
 			.on('click', {plugin: plugin}, plugin.onActivate)
-		.on('keydown', {plugin: plugin}, plugin.onActivate)
+			.on('keydown', {plugin: plugin}, plugin.onActivate)
 		;
 		
 	};
