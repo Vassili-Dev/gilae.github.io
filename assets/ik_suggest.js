@@ -43,9 +43,10 @@
 
 		$elem = this.element
 		.attr({
-			'autocomplete': 'off'
+			'autocomplete': 'off',
+			'aria-label': this._defaults.instructions
 		})
-		.wrap('<span class="ik_suggest"></span>') 
+		.wrap('<span class="ik_suggest"></span>')
 			.on('keydown', {'plugin': plugin}, plugin.onKeyDown) // add keydown event
 			.on('keyup', {'plugin': plugin}, plugin.onKeyUp) // add keyup event
 			.on('focusout', {'plugin': plugin}, plugin.onFocusOut);  // add focusout event
@@ -75,15 +76,15 @@
 	 		case ik_utils.keys.esc:
 
 				plugin.list.empty().hide(); // empty list and hide suggestion box
-
+				plugin.element.blur();
 				break;
 
 				case ik_utils.keys.enter:
 				
 				selected = plugin.list.find('.selected');
 				plugin.element.val( selected.text() ); // set text field value to the selected option
-				plugin.list.empty().hide(); // empty list and hide suggestion box
-				
+				plugin.list.empty();
+				plugin.list.hide();
 				break;
 				
 			}
@@ -129,6 +130,10 @@
         plugin.notify.text(msg);  // add suggestion text to live region to be read by screen reader
 
         break;
+
+     case ik_utils.keys.enter:
+     case ik_utils.keys.esc:
+     break;
 
     default: // get suggestions based on user input
 
