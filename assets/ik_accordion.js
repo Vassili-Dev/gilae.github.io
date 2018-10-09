@@ -125,7 +125,7 @@
 	 */
 	 Plugin.prototype.togglePanel = function (event) {
 
-	 	var plugin, $elem, $panel, $me, isVisible;
+	 	var plugin, $elem, $panel, $me, isVisible, isReadable;
 
 	 	plugin = event.data.plugin;
 	 	$elem = $(plugin.element);
@@ -135,23 +135,30 @@
 		if(plugin.options.autoCollapse) { // expand current panel and collapse the rest
 			
 			plugin.headers.each(function(i, el) {
-				var $hdr, $btn; 
+				
+				
+				var $hdr, $btn, $pnl; 
 				
 				$hdr = $(el);
 				$btn = $hdr.find('.button');
-				
-				if($btn[0] != $(event.currentTarget)[0]) { 
+				$pnl = $btn.parent('dt').next();
+				// console.log(event.currentTarget);
+				// console.log($btn[0]);
+				if($btn[0] != event.currentTarget) { 
 					$btn.removeClass('expanded');
 					$hdr.next().slideUp(plugin.options.animationSpeed);
+					$pnl.attr({'aria-hidden': true});
 				} else { 
 					$btn.addClass('expanded');
 					$hdr.next().slideDown(plugin.options.animationSpeed);
+					$pnl.attr({'aria-hidden': false});
 				}
 			});
 			
 		} else { // toggle current panel depending on the state
 
 			isVisible = !!$panel.is(':visible');
+			$panel.attr({'aria-hidden': isVisible});
 			$panel.slideToggle({ duration: plugin.options.animationSpeed });
 			
 		}
