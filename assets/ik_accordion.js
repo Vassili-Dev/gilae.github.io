@@ -148,8 +148,10 @@
 					$btn.removeClass('expanded');
 					$hdr.next().slideUp(plugin.options.animationSpeed);
 					$pnl.attr({'aria-hidden': true});
+					$btn.attr({'aria-expanded': false});
 				} else { 
 					$btn.addClass('expanded');
+					$btn.attr({'aria-expanded': true});
 					$hdr.next().slideDown(plugin.options.animationSpeed);
 					$pnl.attr({'aria-hidden': false});
 				}
@@ -159,6 +161,7 @@
 
 			isVisible = !!$panel.is(':visible');
 			$panel.attr({'aria-hidden': isVisible});
+			$me.attr({'aria-expanded': !isVisible});
 			$panel.slideToggle({ duration: plugin.options.animationSpeed });
 			
 		}
